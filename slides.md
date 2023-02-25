@@ -29,7 +29,6 @@ image: images/img-127.jpg
 -->
 
 ---
-layout: 
 ---
 # Axoni
 - New York-based capital markets technology firm that specializes in distributed ledger infrastructure
@@ -52,6 +51,7 @@ layout:
 
 ---
 ---
+
 # Review: Mathematical Functions
 <br>
 A function from a set `X` to a set `Y` is an assignment of an element of `Y` to each element of `X`.
@@ -71,53 +71,38 @@ $$
 \operatorname {square\_sum} \colon \mathbb {Z},\mathbb {Z} &\to \mathbb {Z} \\
 \end{aligned}
 $$
-<br>
 
-Inline $\sqrt{3x-1}+(1+x)^2$
+---
+---
 
-Block
-$$
-\begin{array}{c}
+# Scala Functions
 
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &
-= \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
+```scala
 
-\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
+def add_one(x: Integer): Integer = x + 1
 
-\nabla \cdot \vec{\mathbf{B}} & = 0
+val add_one = x => x + 1
 
-\end{array}
-$$
 
-<br>
+def square_sum(x: Integer, y: Integer): Integer = x*x + y*y
+
+val square_sum = (x, y) => x*x + y*y
+```
 
 ---
 ---
 
 # Why Functional Programming?
 
+- Local Reasoning
+- Immutability 
+- No side effects (we'll talk about this later)
 - Functional style code is typically much shorter
 - Parallelization is trivial
 
 <!--
 You can have `style` tag in markdown to override the style for the current page.
 Learn more: https://sli.dev/guide/syntax#embedded-styles
--->
-
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
-
-<!--
-Here is another comment.
 -->
 
 ---
