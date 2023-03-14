@@ -1,9 +1,9 @@
 ---
-theme: apple-basic
+theme: Seriph
 highlighter: shiki
 css: unocss
-layout: intro-image-right
-image: 'images/scala-spiral.png'
+layout: image-right
+image: images/scala-spiral.png
 ---
 
 # Functional Programming
@@ -15,13 +15,17 @@ layout: image-right
 image: images/img-127.jpg
 ---
 
-# Me
+# About Me
 
 - (2016) Computer Science graduate of Cedarville
 - (2016) Java - Principal Financial Group
 - (2019) Scala - Dwolla
 - (2021) Scala - Rally Health (UHG)
 - (2022) Scala - Axoni
+
+
+## How to stay in touch
+collinkueter@gmail.com
 
 <!--
 - Introduce family
@@ -30,13 +34,40 @@ image: images/img-127.jpg
 
 ---
 ---
-# Axoni
+# Where I Work
+<img src="/images/axoni-horiztonal-logo.png" class="h-50" />
+
+<style>
+img {
+  background: white
+}
+</style>
+<br>
+
 - New York-based capital markets technology firm that specializes in distributed ledger infrastructure
 - Provides secure, multiparty infrastructure to automate synchronization of information and processes across entire markets
 
 <!--
 - Discuss what I do at Axoni, Data Completeness "squad" 
 -->
+
+---
+layout: section
+---
+
+# Goal
+
+---
+layout: section
+---
+
+Introduction to Functional Programming (FP)
+
+---
+layout: section
+---
+
+Show how Functional Programming is better
 
 ---
 ---
@@ -61,16 +92,196 @@ A function from a set `X` to a set `Y` is an assignment of an element of `Y` to 
 Represented as:
 $$
 \begin{aligned}
-\operatorname {add\_one} (x)=x+1 \\
+\operatorname {f} (x)=x+1 \\
 (x)\mapsto x+1 \\
+\operatorname {f} \colon \mathbb {Z} &\to \mathbb {Z} \\
 \newline
-\operatorname {square\_sum} (x,y)=x^{2}+y^{2} \\
-(x,y)\mapsto x^{2}+y^{2} \\
-\newline
-\operatorname {add\_one} \colon \mathbb {Z} &\to \mathbb {Z} \\
-\operatorname {square\_sum} \colon \mathbb {Z},\mathbb {Z} &\to \mathbb {Z} \\
+\operatorname {f}(5) = 5 + 1 = 6
 \end{aligned}
 $$
+
+<!-- 
+In programming functions can update a database, mutate some variables, do nothing, throw exceptions, etc.
+
+Mathematical function always evaluate to the same thing given the same input
+
+Mathematical functions are a thing, values that you can manipulate
+
+We want to borrow this same concept which makes our functions act the same
+
+so we create rules to make them act the same 
+
+We call these Pure Functions or function which have no side effects
+
+-->
+
+---
+---
+# Why do we want to do this? 
+
+- Make our programs easier to write
+- Make our pgorams easier to understand
+
+---
+---
+
+Consider an example:
+```scala
+x = [1,2,3]
+y = f(x)
+x = ???
+```
+
+<!-- 
+When we have no side effects x never changes
+ -->
+---
+---
+
+Now let us say we call a very _complicated_ function on `x`
+
+```scala
+x = [1,2,3]
+y = f(a(x) + b(x) * c(x) - 42 * (d(x) - e(x)) + floor(g(x * 3) * max(2*4)))
+x = ???
+```
+
+<!--
+x still does not change
+-->
+---
+---
+Let us consider another example where x is mutated
+
+```scala
+x = [1,2,3]
+t = {
+      x[1] = 5
+      f(a(x) + b(x) * c(x))
+    }
+y = t + f(a(x) + b(x) * c(x) - 42 * (d(x) - e(x)) + floor(g(x * 3) * max(2*4)))
+x = ???
+```
+
+<!-- 
+We now have to look through all of the code again to ensure that it doesn't mutate our parameter
+
+How do we fix this problem? Immutability, once you create something you cannot change it.
+
+-->
+---
+layout: section
+---
+
+# Immutability
+
+---
+---
+# How do we get anything done? 
+
+Give me a copy, but change this one thing
+
+In Scala we have higher-order functions like `map` and `filter` which help us
+
+```scala
+val names = List("jane", "jon", "mary", "joe")
+val result = names.filter(_.startsWith("j"))
+             .map(_.capitalize)
+// result = List("JANE", "JON", "JOE")
+```
+<br>
+In Java
+```java
+List<String> names = Arrays.asList({"jane", "jon", "mary", "joe"});
+List<String> result = new ArrayList<>();
+for(String name : names){
+  if(name.charAt(0) == 'j') {
+    result.add(name.toUppercase());
+  }
+}
+```
+
+<!-- 
+
+We apply a function to an existing collection to create a new collection. 
+
+persistent data structures - huge lists 
+
+-->
+---
+---
+# Review
+
+1. Pure Function (or Functions with No Side Effects)
+2. Immutability
+
+<!-- 
+Two more concepts
+Two benefit of pure functions
+ -->
+
+---
+---
+# Local Reasoning
+
+---
+---
+
+# Referential Transparency
+
+---
+---
+
+# Shorter Code
+Functional style code is typically much shorter
+
+---
+---
+# Parallelization is trivial
+
+---
+---
+
+# Why Functional Programming?
+
+- No side effects
+- Immutability 
+- Local Reasoning
+- Referential Transparency
+- Functional style code is typically much shorter
+- Parallelization is trivial
+
+---
+---
+
+# Declarative vs Imperative
+
+Start
+Turn on your shoes size 9 1/2.
+Make room in your pocket to keep an array[7] of keys.
+Put the keys in the room for the keys in the pocket.
+Enter garage.
+Open garage.
+Enter Car.
+... and so on and on ...
+
+Put the milk in the refrigerator.
+Stop.
+Declarative, whereof functional is a subcategory:
+
+Milk is a healthy drink, unless you have problems digesting lactose.
+Usually, one stores milk in a refrigerator.
+A refrigerator is a box that keeps the things in it cool.
+A store is a place where items are sold.
+By "selling" we mean the exchange of things for money.
+Also, the exchange of money for things is called "buying".
+... and so on and on ...
+
+Make sure we have milk in the refrigerator (when we need it - for lazy functional languages).
+
+---
+---
+# Types
 
 ---
 ---
@@ -78,16 +289,62 @@ $$
 # Scala Functions
 
 ```scala
+def f(x: Integer): Integer = x + 1
 
-def add_one(x: Integer): Integer = x + 1
-
-val add_one = x => x + 1
-
-
-def square_sum(x: Integer, y: Integer): Integer = x*x + y*y
-
-val square_sum = (x, y) => x*x + y*y
+val f: Integer => Integer = (x: Integer) => x + 1
 ```
+<!-- 
+Mechanics of a scala function
+ -->
+---
+---
+# Scala Functions
+
+```scala
+def f(x: Integer): Integer = x + 1
+
+val f: Integer => Integer = (x: Integer) => x + 1
+```
+
+<Arrow x1="120" y1="220" x2="100" y2="125" />
+
+---
+---
+# Scala Functions
+
+```scala
+def f(x: Integer): Integer = x + 1
+
+val f: Integer => Integer = (x: Integer) => x + 1
+```
+
+<Arrow x1="120" y1="220" x2="112" y2="125" />
+
+---
+---
+# Scala Functions
+
+```scala
+def f(x: Integer): Integer = x + 1
+
+val f: Integer => Integer = (x: Integer) => x + 1
+```
+
+<Arrow x1="120" y1="220" x2="150" y2="125" />
+
+---
+---
+# Scala Functions
+
+```scala
+def f(x: Integer): Integer = x + 1
+
+val f: Integer => Integer = (x: Integer) => x + 1
+```
+
+<Arrow x1="120" y1="220" x2="215" y2="125" />
+
+<!-- Great, but we can do this in Java or any other language! -->
 
 ---
 ---
