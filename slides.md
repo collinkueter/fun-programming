@@ -244,6 +244,9 @@ Allows us to understand code when t
 # Shorter Code
 Functional style code is typically much shorter
 
+https://stackoverflow.com/questions/2952732/samples-of-scala-and-java-code-where-scala-code-looks-simpler-has-fewer-lines
+
+
 ---
 ---
 # Parallelization is trivial
