@@ -1,0 +1,48 @@
+
+expressions and reduction 5 + 1 = 6
+values are expressions
+everything is an expression
+all expressions (that do something interesting) reduce to the smallest expression
+interesting programs are going to have to interact with the outside world - how do we do this?
+Hello world example in java - first introducing involves a side effect
+fp has to answer how to use the mathematical notion but interact with the outside world
+compose any two functions and know what they do by figuring out what each reduce to, the composition is defined
+entirely by the reduction
+
+The meaning of the composition of two expressions is the composition of the meanings of each of the expressions
+
+Expression
+Composition
+
+Functional programming is about composing expressions, everything is an expression
+f(5)
+
+f is an expression, 5 is an expression, most obvious example of composition
+in FP you can keep doing this, nest functions calls until you've written your whole application
+
+throw is not the only way you can say something has failed
+key to fp: treat everything as a value
+
+Failure - error handling - no throwing, return something that is a success or failure
+everything in fp in a value, how do you deal with failure, Either
+Either is a monad
+
+After error handling and everything being a value, hello world example, imoggi paper
+Hello world in scala, use IO app
+syntactically similar
+The difference is in java the main method is expected to do something and not return
+In functional scala use functional composition to compose values to type of IO and return
+The runtime is responsible
+
+Type classes - algebraic structures
+
+Why do we care?
+FP is almost the wrong name, what we are doing is programming with algebra, abstract algebra
+algebraic reasoning to keep our code correct, even when our code is complex (various failure scenarios, concurrency,
+multiple external systems)
+
+claim: all these things () can be done algebraically
+lgebriac laws - functor, applicative, monad, monoid,
+have laws associated with them so when we compose those laws still exist
+I want to know what my code is going to do without running it and/or "make illegal states unrepresentable"
+goal is to make illegal state unrepresentable - what we want it to do and what we don't want it to do
