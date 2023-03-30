@@ -4,6 +4,26 @@
 
 ---
 ---
+# Algebraic Data Types (ADTs)
+
+- They are an idiomatic way of representing data using “ands” and “ors” and the
+  rules for manipulating those symbols, encoded as methods.
+- Completely type safe
+
+```scala
+sealed trait Shape
+final case class Rectangle(width: Double, height: Double) extends Shape
+final case class Circle(radius: Double) extends Shape
+
+def area(shape: Shape): Double =
+  shape match {
+    case Rectangle(w, h) => w * h
+    case Circle(r) => math.Pi * r * r
+  }
+```
+
+---
+---
 
 # Traditionally
 

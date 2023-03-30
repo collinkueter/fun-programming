@@ -179,14 +179,6 @@ Programs that run with parallelism is complex and notoriously difficult to reaso
 - Don't Scale
 
 ---
----
-
-# Types
-
-
-
-
----
 layout: section
 ---
 
@@ -195,6 +187,9 @@ layout: section
 ---
 ---
 # How do we handle errors?
+
+- Traditionally throw is the way you say something has failed
+- A key in FP is to treat everything has a value
 
 The non-functional way
 
@@ -207,96 +202,26 @@ def toInt(s: String): Int = {
   }
 }
 
+val x = toInt("1") + toInt("2")
 ```
+
 The functional way
 
 ```scala
-// sealed abstract class Either[+A, +B]
+// sealed abstract class Either[A, B]
 
 object NonNumericError
 
 def toInt(s: String): Either[NonNumericError, Int] =
   if (s.forall(Character.isDigit)) Integer.parseInt(s) else NonNumericError
+  
+for {
+  x <- toInt("1")
+  y <- toInt("2")
+} yield x + y
 ```
 
 ---
+src: ./pages/side-effects.md
 ---
 
-# Algebraic Data Types (ADTs)
-
-- Functional programming concept with a fancy name but a very simple meaning. 
-- They are an idiomatic way of representing data using “ands” and “ors”. 
-```scala
-sealed trait Shape
-final case class Rectangle(width: Double, height: Double) extends Shape
-final case class Circle(radius: Double) extends Shape
-```
-
----
----
-
-# How do we handle side effects? 
-
-An effect is a description of an action (or actions) that will be taken when evaluation happens. 
-
----
----
-
-# Implementing a simple effect type
-
-### Our goal is to represent effects while maintaining referentially transparency
-
-```scala
-def fahrenheitToCelsius(f: Double): Double = (f - 32) * 5.0 / 9.0
-def converter: Unit = {
-  println("Enter a temperature in degrees Fahrenheit: ")
-  val d = readLine.toDouble
-  println(fahrenheitToCelsius(d))
-}
-```
-IO type
-```scala
-trait IO { def run: Unit }
-
-val print = new IO { def run = println(msg) }
-```
-
-Using IO
-```scala
-def fahrenheitToCelsius(f: Double): Double = (f - 32) * 5.0 / 9.0
-def converter: IO = {
-  val prompt: IO =
-    new IO {
-      def run = println("Enter a temperature in degrees Fahrenheit: ")
-    }
-  // now what ???
-}
-
-```
-
-```scala
-sealed trait IO[A] {
-  self =>
-  def run: A
-
-  def map[B](f: A => B): IO[B] = new IO[B] {
-    def run = f(self.run)
-  }
-
-  def flatMap[B](f: A => IO[B]): IO[B] = new IO[B] {
-    def run = f(self.run).run
-  }
-}
-
-object IO extends Monad[IO] {
-  def unit[A](a: => A): IO[A] = new IO[A] {
-    def run = a
-  }
-
-  def flatMap[A, B](fa: IO[A])(f: A => IO[B]) = fa flatMap f
-
-  def apply[A](a: => A): IO[A] = unit(a)
-}
-
-
-```

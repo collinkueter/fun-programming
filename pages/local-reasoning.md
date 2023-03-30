@@ -14,7 +14,9 @@ f(1)
 ```
 
 ```scala
-var x = 0
+val x = 0
+
 def foo(x: Int, y: Int): Int = if (x < 0) y - x else y + x
+
 f(x, 1)
 ```

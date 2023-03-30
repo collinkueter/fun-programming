@@ -15,3 +15,8 @@ val z = f compose g
 h(2.3)
 z(2.3)
 f(g(2.3))
+
+def bfs[T](s: Stream[T], f: T => Stream[T]): Stream[T] = {
+  if (s.isEmpty) s
+  else s.head #:: bfs(s.tail append f(s.head), f)
+}
